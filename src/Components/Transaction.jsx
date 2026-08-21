@@ -5,7 +5,7 @@ function Transaction({ setTransactions }) {
   const [form, setForm] = useState({
     title: "",
     amount: "",
-    type: "",
+    type: "Income",
   });
 
   const handleChange = (e) => {
@@ -24,6 +24,7 @@ function Transaction({ setTransactions }) {
       title: form.title,
       amount: Number(form.amount),
       type: form.type,
+      dateTime: Date.now(),
     };
     setTransactions((prev) => [...prev, transaction]);
   };

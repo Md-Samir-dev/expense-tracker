@@ -1,40 +1,55 @@
+import { useState } from "react";
 function Store({ transactions, setTransactions }) {
+  const [filter, setFilter] = useState("All");
   const handleDelete = (id) => {
     setTransactions((prev) =>
       prev.filter((transaction) => transaction.id !== id),
     );
   };
+  const filteredTransactions =
+    filter === "All"
+      ? transactions
+      : transactions.filter((transaction) => transaction.type === filter);
   return (
-    <div className="py-4 rounded-lg border-[1.5px] border-[#E2E8F0] p-4 w-249 ml-3">
+    <div className="py-4 rounded-lg border-[1.5px] border-[#E2E8F0] p-4 w-249 ml-3 flex flex-col gap-2">
       {/* Header */}
-      <div className="mb-1 flex items-center justify-between border-b border-[#E2E8F0] w-full">
+      <div className=" flex items-center justify-between border-b border-[#E2E8F0] w-242 h-10  ">
         <h2 className="text-[18px] font-bold text-[#10245C]">Transactions</h2>
 
-        <select className="rounded-lg border-[1.5px] border-[#CBD5E1] bg-white px-4 py-1 text-sm text-[#334155] outline-none">
-          <option>All Transactions</option>
-          <option>Income</option>
-          <option>Expense</option>
+        <select
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+          className="rounded-lg border-[1.5px] border-[#CBD5E1] bg-white  text-sm text-[#334155] outline-none w-40 h-6"
+        >
+          <option value="All">All Transactions</option>
+          <option value="Income">Income</option>
+          <option value="Expense">Expense</option>
         </select>
       </div>
 
       {/* Transactions History */}
-      {transactions.map((transaction) => (
+      {filteredTransactions.map((transaction) => (
         <div
           key={transaction.id}
-          className="flex items-center justify-between border-b border-[#E2E8F0] py-4"
+          className="flex items-center justify-between border-b border-[#E2E8F0]  h-15"
         >
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#DCFCE7]">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#DCFCE7]">
               💰
             </div>
 
             <div>
-              <h3 className="font-semibold text-[#334155]">
+              <h4 className="font-semibold text-[#334155]">
                 {transaction.title}
-              </h3>
+              </h4>
 
-              <p className="text-sm text-[#94A3B8]">
-                {transaction.type} • Today
+              <p className="text-[10px] text-[#94A3B8]">
+                {new Date(transaction.dateTime).toLocaleDateString("en-GB")}
+                <br />
+                {new Date(transaction.dateTime).toLocaleTimeString("en-US", {
+                  hour: "numeric",
+                  minute: "2-digit",
+                })}
               </p>
             </div>
           </div>

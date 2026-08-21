@@ -3,9 +3,17 @@ import TotalBalance from "./Components/TotalBalance";
 import Income from "./Components/Income";
 import Transaction from "./Components/Transaction";
 import Store from "./Components/Store";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 function App() {
-  const [transactions, setTransactions] = useState([]);
+  const [transactions, setTransactions] = useState(() => {
+    const savedTransactions = localStorage.getItem("transactions");
+
+    return savedTransactions ? JSON.parse(savedTransactions) : [];
+  });
+  useEffect(() => {
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+  }, [transactions]);
+
   //Total income
   const totalIncome = transactions
     .filter((transaction) => transaction.type === "Income")
