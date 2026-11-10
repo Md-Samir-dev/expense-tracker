@@ -11,9 +11,9 @@ function Store({ transactions, setTransactions }) {
       ? transactions
       : transactions.filter((transaction) => transaction.type === filter);
   return (
-    <div className="py-4 rounded-lg border-[1.5px] border-[#E2E8F0] p-4 w-249 ml-3 flex flex-col gap-2">
+    <div className="py-4 rounded-lg border-[1.5px] border-[#E2E8F0] p-4 w-full ml-3 flex flex-col gap-2">
       {/* Header */}
-      <div className=" flex items-center justify-between border-b border-[#E2E8F0] w-242 h-10  ">
+      <div className=" flex items-center justify-between border-b border-[#E2E8F0] w-full h-10  ">
         <h2 className="text-[18px] font-bold text-[#10245C]">Transactions</h2>
 
         <select

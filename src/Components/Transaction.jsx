@@ -29,7 +29,7 @@ function Transaction({ setTransactions }) {
     setTransactions((prev) => [...prev, transaction]);
   };
   return (
-    <div className="ml-3 w-249 py-4">
+    <div className="ml-3 w-full py-4">
       {/* Add Transaction */}
       <section className="rounded-lg border-[1.5px] border-[#E2E8F0] p-5">
         {/* Heading */}
